@@ -8,8 +8,8 @@
     'depends': ['point_of_sale'],
     'assets': {
         'point_of_sale._assets_pos': [
-            'static/src/app/screens/partner_list/partner_line/partner_line.xml',
-            'static/src/app/screens/partner_list/partner_list.xml',
+            'static/src/app/screens/partner_line_override.xml',
+            'static/src/app/screens/partner_list_override.xml',
         ],
     },
     'installable': True,
