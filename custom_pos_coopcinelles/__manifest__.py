@@ -7,7 +7,7 @@
     
     Removes GDPR columns from the partner list
     """,
-    'version': '1.0.0',
+    'version': '18.0.1.0.1',
     'category': 'Point of Sale',
     'depends': ['point_of_sale'],
     'assets': {
