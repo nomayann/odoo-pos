@@ -7,11 +7,11 @@
     -->
     <t t-name="mon_module_pos_client.PartnerLineOverride" t-inherit="point_of_sale.PartnerList" t-inherit-mode="extension">
         <!-- Example : target a specific item  by classto hide it -->
-        <xpath expr="//thead//th[normalize-space(text())='Address']" position="attributes">
+        <xpath expr="//th[normalize-space(text())='Address']" position="attributes">
             <attribute name="class">d-none</attribute>
         </xpath>
         <xpath expr="//th[hasclass('partner-line-email')]" position="attributes">
-            <attribute name="class">partner-line-adress d-none</attribute>
+            <attribute name="class">partner-line-email d-none</attribute>
         </xpath>
     </t>
 </templates>

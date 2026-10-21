@@ -15,8 +15,8 @@
             <attribute name="class">partner-line-email d-none</attribute>
         </xpath>
         <!-- Large UI -->
-        <xpath expr="//td//div[hasclass('partner-line-adress')]" position="attributes">
-            <attribute name="class">partner-line-adress d-none</attribute>
+        <xpath expr="//td[div[hasclass('partner-line-adress')]]" position="attributes">
+            <attribute name="class">d-none</attribute>
         </xpath>
         <xpath expr="//td[hasclass('partner-line-email')]" position="attributes">
             <attribute name="class">partner-line-email d-none</attribute>
