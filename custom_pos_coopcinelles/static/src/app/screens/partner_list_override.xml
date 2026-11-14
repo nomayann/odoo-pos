@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-    <!-- 
-    Original template path: 
-        * addons/point_of_sale/static/src/app/screens/partner_list/partner_line/partner_line.xml
-    Override PartnerList template to hide address and contact columns 
-    -->
-    <t t-name="mon_module_pos_client.PartnerLineOverride" t-inherit="point_of_sale.PartnerList" t-inherit-mode="extension">
-        <!-- Example : target a specific item  by classto hide it -->
+    <t t-name="custom_pos_coopcinelles.PartnerListOverride" t-inherit="point_of_sale.PartnerList" t-inherit-mode="extension">
+        
+        <!-- 
+        Original template path: 
+            * addons/point_of_sale/static/src/app/screens/partner_list/partner_line/partner_line.xml
+        Override PartnerList template to hide address and contact
+        -->
         <xpath expr="//th[normalize-space(text())='Address']" position="attributes">
-            <attribute name="class">d-none</attribute>
+            <attribute name="class">py-2 d-none</attribute>
         </xpath>
+
         <xpath expr="//th[hasclass('partner-line-email')]" position="attributes">
-            <attribute name="class">partner-line-email d-none</attribute>
+            <attribute name="class">partner-line-email py-2 d-none</attribute>
         </xpath>
+
     </t>
 </templates>
