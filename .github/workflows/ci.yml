@@ -2,9 +2,9 @@ name: Odoo Module CI
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    tags-ignore:
+      - '*-v*' # Ignore les tags pour laisser le workflow de release gérer ses propres événements
   pull_request:
-    branches: [ "main", "develop" ]
 
 jobs:
   validate-and-lint:
@@ -58,6 +58,4 @@ jobs:
       - name: Run Python Linting (Flake8) across modules
         run: |
           echo "Lancement de Flake8 sur le code Python..."
-          # On analyse l'ensemble du dépôt ou des dossiers de modules
-          # (Ignore les dossiers cachés et fichiers temporaires)
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=.*,venv,env
