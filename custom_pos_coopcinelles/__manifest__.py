@@ -14,6 +14,7 @@
         'point_of_sale._assets_pos': [
             'custom_pos_coopcinelles/static/src/app/screens/partner_line_override.xml',
             'custom_pos_coopcinelles/static/src/app/screens/partner_list_override.xml',
+            'custom_pos_coopcinelles/static/src/app/screens/partner_list_patch.js',
         ],
     },
     'installable': True,
