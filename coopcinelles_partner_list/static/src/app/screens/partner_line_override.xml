@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-    <t t-name="custom_pos_coopcinelles.PartnerLineOverride" t-inherit="point_of_sale.PartnerLine" t-inherit-mode="extension">
+    <t t-name="coopcinelles_partner_list.PartnerLineOverride" t-inherit="point_of_sale.PartnerLine" t-inherit-mode="extension">
         
         <!-- 1. MOBILE MODE : Hide the address and contact block with d-none class -->
         <xpath expr="//div[hasclass('partner-line-adress')]" position="attributes">

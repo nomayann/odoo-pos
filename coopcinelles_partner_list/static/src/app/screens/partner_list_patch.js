@@ -5,7 +5,7 @@ import { patch } from "@web/core/utils/patch";
 
 patch(PartnerList.prototype, {
     getPartners() {
-        // The list retrieved via super() already contains ONLY valid customers (filtered by Python)
+        // The list retrieved via super() already contains ONLY valid customers (filtered by Python model)
         const partners = super.getPartners();
         const query = this.state.query;
 

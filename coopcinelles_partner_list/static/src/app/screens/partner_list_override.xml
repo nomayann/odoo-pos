@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-    <t t-name="custom_pos_coopcinelles.PartnerListOverride" t-inherit="point_of_sale.PartnerList" t-inherit-mode="extension">
+    <t t-name="coopcinelles_partner_list.PartnerListOverride" t-inherit="point_of_sale.PartnerList" t-inherit-mode="extension">
         
         <!-- 
         Original template path: 
