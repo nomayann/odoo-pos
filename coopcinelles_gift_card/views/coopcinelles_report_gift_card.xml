@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="custom_gift_card_report_coopcinelles" inherit_id="loyalty.gift_card_report">
+        <template id="coopcinelles_gift_card_report_coopcinelles" inherit_id="loyalty.gift_card_report">
             <xpath expr="//div[@style='padding-top:20px; padding-bottom:20px']" position="replace">
                 <div style="padding-top:20px; padding-bottom:20px; text-align:center;">
-                    <img src="/custom_gift_card/static/src/img/gimmick_coopcinelles.jpg" 
+                    <img src="/coopcinelles_gift_card/static/src/img/gimmick_coopcinelles.jpg" 
                          style="display:block; border:0; outline:none; text-decoration:none; margin:auto; max-height: 200px; max-width: 300px;" 
                          alt="Custom gift card picture"/>
                 </div>
