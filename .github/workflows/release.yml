@@ -21,10 +21,10 @@ jobs:
           TAG="${{ github.ref_name }}"
           MODULE_NAME=$(echo "$TAG" | sed -E 's/-v[0-9]+.*//')
           VERSION=$(echo "$TAG" | sed -E 's/.*-v//')
-          
+
           echo "module_name=$MODULE_NAME" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          
+
           echo "Module détecté : $MODULE_NAME"
           echo "Version détectée : $VERSION"
 
@@ -44,7 +44,7 @@ jobs:
         run: |
           MODULE="${{ steps.extract.outputs.module_name }}"
           ZIP_NAME="${{ steps.extract.outputs.module_name }}-${{ steps.extract.outputs.version }}.zip"
-          
+
           echo "Création du zip propre pour $MODULE..."
           zip -r "$ZIP_NAME" "$MODULE" \
             -x "*/.git*" \
@@ -52,7 +52,7 @@ jobs:
             -x "*.pyc" \
             -x "*.DS_Store" \
             -x "*/tests/*"
-            
+
           echo "zip_name=$ZIP_NAME" >> $GITHUB_ENV
 
       - name: Create GitHub Release & Upload ZIP
