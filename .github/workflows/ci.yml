@@ -2,8 +2,6 @@ name: Odoo Module CI
 
 on:
   push:
-    tags-ignore:
-      - '*-v*' # Ignore les tags pour laisser le workflow de release gérer ses propres événements
   pull_request:
 
 jobs:
