@@ -4,7 +4,7 @@
     'category': 'Sales/Loyalty',
     'depends': ['loyalty'],
     'data': [
-        'views/coopcinelles_report_gift_card.xml',
+        'views/coopcinelles_gift_card_report.xml',
     ],
     'installable': True,
     'auto_install': False,
