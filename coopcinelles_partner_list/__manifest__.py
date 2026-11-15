@@ -4,7 +4,7 @@
     'author': "Coop'Cinelles 38 / yannchvl@gmail.com",
     'description': """
     A the point of sale customization for Coop'Cinelles 38
-    
+
     Removes GDPR columns from the partner list (address, email, phone number)
     Improves the partner list to only show valid customers, excluding pure suppliers and Odoo users.
     Update search parameters to filter partners based on customer rank and user association.
