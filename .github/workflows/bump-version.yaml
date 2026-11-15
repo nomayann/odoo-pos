@@ -33,7 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python3 -c '
+          cat << 'EOF' > bump_script.py
           import os, subprocess, re
 
           def increment_version(version_str):
@@ -95,10 +95,10 @@ jobs:
               # Create and switch to a new branch
               subprocess.run(["git", "checkout", "-b", branch_name], check=True)
 
-              # Update the manifest version
-              new_content = content.replace(f"'\''{old_version}'\''", f"'\''{new_version}'\''")
+              # Update the manifest version safely
+              new_content = content.replace(f"'{old_version}'", f"'{new_version}'")
               if new_content == content:
-                  new_content = content.replace(f"\"{old_version}\"", f"\"{new_version}\"")
+                  new_content = content.replace(f'"{old_version}"', f'"{new_version}"')
 
               with open(manifest_path, "w", encoding="utf-8") as f:
                   f.write(new_content)
@@ -127,4 +127,6 @@ jobs:
 
               # Switch back to main for the next module (if any)
               subprocess.run(["git", "checkout", "main"], check=True)
-          '
+          EOF
+
+          python3 bump_script.py
