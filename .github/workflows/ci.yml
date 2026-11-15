@@ -14,6 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check for non-breaking spaces
+        run: |
+          if git grep -n $'\xc2\xa0' -- '*.py' '*.xml' '*.js' '*.yml' '*.yaml' '*.json'; then
+            echo "❌ Non-breaking spaces (\u00a0) detected! Replace them with standard spaces."
+            exit 1
+          fi
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
