@@ -57,7 +57,9 @@ jobs:
             -x "*/.editorconfig" \
             -x "*/.gitignore" \
             -x "*/.github/*" \
-            -x "*/.vscode/*"
+            -x "*/.vscode/*" \
+            -x "docker-compose.yaml" \
+            -x "Makefile"
 
           echo "zip_name=$ZIP_NAME" >> $GITHUB_ENV
 

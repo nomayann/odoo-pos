@@ -31,6 +31,7 @@ $(MODULES): ## Generate a clean ZIP for a specific module (e.g., make coopcinell
 		-x "*/.gitignore" \
 		-x "*/.github/*" \
 		-x "*/.vscode/*" \
+		-x "docker-compose.yaml" \
 		-x "Makefile"; \
 	echo "✅ Successfully generated: $$ZIP_NAME"
 
