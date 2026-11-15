@@ -1,4 +1,12 @@
 {
-    "editor.unicodeHighlight.nonBreakingSpace": true,
     "editor.renderWhitespace": "boundary",
+    "editor.unicodeHighlight.invisibleCharacters": true,
+    "editor.unicodeHighlight.ambiguousCharacters": true,
+    "editor.unicodeHighlight.allowedCharacters": {
+        // Allow some common characters that are often used in code and text, but can be confused with other characters.
+    },
+    "editor.unicodeHighlight.nonBasicASCII": true,
+
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
 }
