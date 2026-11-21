@@ -1,0 +1,172 @@
+name: Tag and Release Odoo Modules
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "*/__manifest__.py"
+
+permissions:
+  contents: write
+
+jobs:
+  tag-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Detect bumped modules and create tags
+        id: detect
+        shell: python
+        env:
+          BASE_REF: ${{ github.event.before }}
+        run: |
+          import ast
+          import json
+          import os
+          import subprocess
+
+          base_ref = os.environ.get("BASE_REF")
+          head_ref = "HEAD"
+
+          if not base_ref or set(base_ref) == {"0"}:
+              print("No previous commit SHA available; skipping.")
+              with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+                  out.write("releases=[]\n")
+              raise SystemExit(0)
+
+          has_base = (
+              subprocess.run(
+                  ["git", "rev-parse", "--verify", base_ref],
+                  capture_output=True,
+                  text=True,
+              ).returncode
+              == 0
+          )
+          if not has_base:
+              print(f"Base ref {base_ref} not found; skipping.")
+              with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+                  out.write("releases=[]\n")
+              raise SystemExit(0)
+
+          diff_output = subprocess.check_output(
+              [
+                  "git",
+                  "diff",
+                  "--name-only",
+                  f"{base_ref}..{head_ref}",
+                  "--",
+                  "*/__manifest__.py",
+              ],
+              text=True,
+          ).splitlines()
+
+          def read_version(ref: str, path: str):
+              try:
+                  content = subprocess.check_output(
+                      ["git", "show", f"{ref}:{path}"],
+                      text=True,
+                  )
+                  manifest = ast.literal_eval(content)
+                  return manifest.get("version") if isinstance(manifest, dict) else None
+              except subprocess.CalledProcessError:
+                  return None
+              except Exception as exc:
+                  print(f"Warning: could not parse {path} at {ref}: {exc}")
+                  return None
+
+          releases = []
+
+          for manifest_path in sorted(set(diff_output)):
+              old_ver = read_version(base_ref, manifest_path)
+              new_ver = read_version(head_ref, manifest_path)
+
+              if not new_ver:
+                  print(f"No version found in {manifest_path} at {head_ref}, skipping.")
+                  continue
+
+              if old_ver == new_ver:
+                  print(f"Version unchanged ({new_ver}) for {manifest_path}, skipping.")
+                  continue
+
+              module_name = os.path.dirname(manifest_path)
+              tag_name = f"{module_name}-v{new_ver}"
+
+              existing = subprocess.run(
+                  ["git", "rev-parse", "-q", "--verify", f"refs/tags/{tag_name}"],
+                  capture_output=True,
+                  text=True,
+              )
+              if existing.returncode == 0:
+                  print(f"Tag {tag_name} already exists, skipping.")
+                  continue
+
+              subprocess.check_call(
+                  ["git", "tag", "-a", tag_name, "-m", f"Release {module_name} {new_ver}"]
+              )
+              subprocess.check_call(["git", "push", "origin", tag_name])
+              print(f"Created and pushed tag: {tag_name}")
+
+              releases.append({
+                  "module": module_name,
+                  "version": str(new_ver),
+                  "tag": tag_name,
+              })
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"releases={json.dumps(releases)}\n")
+
+      - name: Build ZIP and publish GitHub Release for each bumped module
+        if: steps.detect.outputs.releases != '[]'
+        shell: python
+        env:
+          RELEASES_JSON: ${{ steps.detect.outputs.releases }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          import json
+          import os
+          import shutil
+          import subprocess
+          import tempfile
+
+          releases = json.loads(os.environ["RELEASES_JSON"])
+
+          for item in releases:
+              module = item["module"]
+              version = item["version"]
+              tag = item["tag"]
+              zip_name = f"{module}-{version}.zip"
+
+              with tempfile.TemporaryDirectory() as tmpdir:
+                  zip_path = os.path.join(tmpdir, zip_name)
+                  subprocess.check_call(["git", "archive", "--format=zip", "-o", zip_path, tag, module])
+
+                  # Retire le dossier tests s'il est présent dans l'archive
+                  if shutil.which("zip"):
+                      subprocess.run(["zip", "-d", zip_path, f"{module}/tests/*"], capture_output=True, text=True)
+
+                  # Création de la release via gh CLI (préinstallée sur ubuntu-latest)
+                  subprocess.check_call([
+                      "gh",
+                      "release",
+                      "create",
+                      tag,
+                      zip_path,
+                      "--repo",
+                      os.environ["REPO"],
+                      "--title",
+                      f"{module} v{version}",
+                      "--notes",
+                      f"Automated release for Odoo 18 module **{module}** (version `v{version}`).",
+                  ])
+                  print(f"Published release for {tag} with {zip_name}")
