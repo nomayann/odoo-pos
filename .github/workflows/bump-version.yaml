@@ -96,9 +96,9 @@ jobs:
               subprocess.run(["git", "checkout", "-b", branch_name], check=True)
 
               # Update the manifest version safely
-              new_content = content.replace(f"'{old_version}'", f"'{new_version}'")
-              if new_content == content:
-                  new_content = content.replace(f'"{old_version}"', f'"{new_version}"')
+              new_content = (
+                  content[: match.start(1)] + new_version + content[match.end(1) :]
+              )
 
               with open(manifest_path, "w", encoding="utf-8") as f:
                   f.write(new_content)
