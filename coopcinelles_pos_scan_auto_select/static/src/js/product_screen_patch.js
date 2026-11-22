@@ -2,14 +2,16 @@
 
 import { ProductScreen } from "@point_of_sale/app/screens/product_screen/product_screen";
 import { patch } from "@web/core/utils/patch";
+import { useService } from "@web/core/utils/hooks";
 import { onMounted, onWillUnmount } from "@odoo/owl";
 
 patch(ProductScreen.prototype, {
     setup() {
         super.setup(...arguments);
+        this.barcodeReader = useService("barcode_reader");
 
         const onKeyDown = async (ev) => {
-            // Vérify if the Enter key is pressed and the focus is on the search bar
+            // Check if the Enter key is pressed while focus is inside the POS search bar
             if (
                 ev.key === "Enter" &&
                 document.activeElement &&
@@ -20,35 +22,36 @@ patch(ProductScreen.prototype, {
                     return;
                 }
 
-                // Retrieve the list of products that match the search word
+                // Check if the input matches a single displayed product's exact barcode
+                // or looks like a standard numeric barcode (EAN-8, EAN-13, UPC, scale barcode, etc.)
                 const matchingProducts = this.productsToDisplay;
+                const isSingleExactBarcode =
+                    matchingProducts.length === 1 &&
+                    (matchingProducts[0].barcode === searchWord ||
+                        matchingProducts[0].product_tmpl_id?.barcode === searchWord);
 
-                // Verify if there is exactly one matching product
-                // And the search word is a valid barcode format (8 to 14 digits)
-                if (matchingProducts.length === 1) {
-                    const product = matchingProducts[0];
-                    const isExactBarcode =
-                        product.barcode === searchWord ||
-                        (product.product_tmpl_id?.barcode === searchWord);
-                    const isBarcodeFormat = /^\d{8,14}$/.test(searchWord);
+                const looksLikeBarcode = /^\d{8,14}$/.test(searchWord);
 
-                    // If both conditions are met, prevent the default behavior and add the product to the current order
-                    if (isExactBarcode && isBarcodeFormat) {
-                        ev.preventDefault();
-                        ev.stopPropagation();
+                if (isSingleExactBarcode && looksLikeBarcode) {
+                    ev.preventDefault();
+                    ev.stopPropagation();
 
-                        // Add the product to the current order
-                        await this.pos.addLineToCurrentOrder({ product_id: product });
+                    const inputEl = document.activeElement;
 
-                        // Reset the search bar and clear the input field
-                        this.pos.searchProductWord = "";
-                        document.activeElement.value = "";
-                    }
+                    // Clear the search input before triggering the native barcode scan
+                    this.pos.searchProductWord = "";
+                    inputEl.value = "";
+                    // Blur the input so subsequent scans are handled globally by the barcode reader
+                    inputEl.blur();
+
+                    // Delegate full processing (scales, lots, packagings) to Odoo 18's native barcode reader
+                    await this.barcodeReader.scan(searchWord);
                 }
             }
         };
 
         onMounted(() => {
+            // Use capture phase (true) to intercept Enter before the input's default behavior
             document.addEventListener("keydown", onKeyDown, true);
         });
 
