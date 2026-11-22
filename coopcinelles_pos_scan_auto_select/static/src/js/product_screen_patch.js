@@ -15,7 +15,9 @@ patch(ProductScreen.prototype, {
             if (
                 ev.key === "Enter" &&
                 document.activeElement &&
-                document.activeElement.closest(".pos-search-bar")
+                document.activeElement.tagName === "INPUT" &&
+                document.activeElement.type === "text" &&
+                document.activeElement.closest(".pos-topheader")
             ) {
                 const searchWord = (this.pos.searchProductWord || "").trim();
                 if (!searchWord) {
@@ -32,7 +34,7 @@ patch(ProductScreen.prototype, {
 
                 const looksLikeBarcode = /^\d{8,14}$/.test(searchWord);
 
-                if (isSingleExactBarcode && looksLikeBarcode) {
+                if (isSingleExactBarcode || looksLikeBarcode) {
                     ev.preventDefault();
                     ev.stopPropagation();
 
