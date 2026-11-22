@@ -32,3 +32,13 @@ Un fichier `docker-compose.yml` est directement disponible à la racine du dép�
 
 ```bash
 docker compose up -d
+
+## Déploiement et release
+
+### Versionnement
+
+Les montées de version des modules sont générées automatiquement. Lorsqu'une pull request est mergée, une pull request est automatiquement ouverte avec la mise à jour du fichier `__manifest__.py` du module. (github workflow `bump-version`)
+
+### Tags et release
+
+Lorsque'une nouvelle version de module est mergée dans la branche mais, un tag et une release de module sont automatiquement générés(workflow `tag-and-release-odoo-module`).
