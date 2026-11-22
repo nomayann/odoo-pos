@@ -17,9 +17,7 @@ Dépôt regroupant les développements spécifiques et personnalisations réalis
 
 | Nom technique | Nom fonctionnel | Description |
 | :--- | :--- | :--- |
-
-
-*(Remplacez ou complétez cette liste avec les noms techniques exacts de vos dossiers).*
+| coopcinelles_gift_card | Custom Gift Card Visual | Replaces gift cards picture |
 
 ---
 
@@ -28,6 +26,7 @@ Dépôt regroupant les développements spécifiques et personnalisations réalis
 Un fichier `docker-compose.yml` est directement disponible à la racine du dépôt pour lancer une instance **Odoo 18** isolée et monter automatiquement les modules locaux.
 
 ### 1. Démarrer l'environnement local
+
 À la racine du dépôt :
 
 ```bash
