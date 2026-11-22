@@ -18,6 +18,7 @@ Dépôt regroupant les développements spécifiques et personnalisations réalis
 | Nom technique | Nom fonctionnel | Description |
 | :--- | :--- | :--- |
 | coopcinelles_gift_card | Custom Gift Card Visual | Replaces gift cards picture |
+| coopcinelles_pos_scan_auto_select | POS - Scan Auto Select | Automatically selects the first product in the search results when scanning a barcode in the POS |
 
 ---
 
