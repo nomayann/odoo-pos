@@ -1,6 +1,5 @@
 /** @odoo-module */
 
-import { _t } from "@web/core/l10n/translation";
 import { PartnerList } from "@point_of_sale/app/screens/partner_list/partner_list";
 import { patch } from "@web/core/utils/patch";
 
@@ -12,27 +11,21 @@ import { patch } from "@web/core/utils/patch";
 patch(PartnerList.prototype, {
     getPartners() {
         const partners = super.getPartners();
-        const query = (this.state.query || "").trim().toLowerCase();
-
-        if (!query) {
-            return partners;
-        }
 
         return this.filterPartnersByName(partners);
     },
     async getNewPartners() {
         const partners = await super.getNewPartners();
+
+        return this.filterPartnersByName(partners);
+    },
+    // filterPartnersByName filters the partners based on the search query, considering only the partner name.
+    filterPartnersByName(partners) {
         const query = (this.state.query || "").trim().toLowerCase();
 
         if (!query) {
             return partners;
         }
-
-        return this.filterPartnersByName(partners);
-    },
-    // This method filters the partners based on the search query, considering only the partner name.
-    filterPartnersByName(partners) {
-        const query = (this.state.query || "").trim().toLowerCase();
         const searchTerms = query.split(/\s+/).filter(Boolean);
 
         return partners.filter((partner) => {
