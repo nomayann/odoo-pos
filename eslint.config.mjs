@@ -1,0 +1,35 @@
+export default [
+    {
+        files: ["**/*.js"],
+        languageOptions: {
+            ecmaVersion: 2022,
+            sourceType: "module",
+            globals: {
+                window: "readonly",
+                document: "readonly",
+                navigator: "readonly",
+                console: "readonly",
+                setTimeout: "readonly",
+                clearTimeout: "readonly",
+                setInterval: "readonly",
+                clearInterval: "readonly",
+                requestAnimationFrame: "readonly",
+                cancelAnimationFrame: "readonly",
+                CustomEvent: "readonly",
+                Event: "readonly",
+                HTMLElement: "readonly",
+                odoo: "readonly",
+            },
+        },
+        rules: {
+            "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+            "no-console": "error",
+            "no-debugger": "error",
+            "prefer-const": "error",
+            "eqeqeq": ["error", "always"],
+            "semi": ["error", "always"],
+            "quotes": ["error", "double", { avoidEscape: true }],
+            "comma-dangle": ["error", "always-multiline"],
+        },
+    },
+];
