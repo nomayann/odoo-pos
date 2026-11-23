@@ -10,8 +10,8 @@
         "point_of_sale._assets_pos": [
             "coopcinelles_pos_scan_auto_select/static/src/js/product_screen_patch.js",
         ],
-        "point_of_sale.assets_qunit_tests": [
-            "coopcinelles_pos_scan_auto_select/static/tests/product_screen_patch.test.js",
+        "web.assets_tests": [
+            "coopcinelles_pos_scan_auto_select/static/tests/tours/scan_auto_select_tour.js",
         ],
     },
     "installable": True,

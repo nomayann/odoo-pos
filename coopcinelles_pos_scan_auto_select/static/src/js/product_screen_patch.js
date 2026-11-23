@@ -19,7 +19,8 @@ patch(ProductScreen.prototype, {
                 document.activeElement.type === "text" &&
                 document.activeElement.closest(".pos-topheader")
             ) {
-                const searchWord = (this.pos.searchProductWord || "").trim();
+                const inputEl = document.activeElement;
+                const searchWord = ((this.pos?.searchProductWord ?? inputEl.value) || inputEl.value || "").trim();
                 if (!searchWord) {
                     return;
                 }
@@ -41,8 +42,11 @@ patch(ProductScreen.prototype, {
                     const inputEl = document.activeElement;
 
                     // Clear the search input before triggering the native barcode scan
-                    this.pos.searchProductWord = "";
+                    if (this.pos && "searchProductWord" in this.pos) {
+                        this.pos.searchProductWord = "";
+                    }
                     inputEl.value = "";
+                    inputEl.dispatchEvent(new Event("input", { bubbles: true }));
                     // Blur the input so subsequent scans are handled globally by the barcode reader
                     inputEl.blur();
 
