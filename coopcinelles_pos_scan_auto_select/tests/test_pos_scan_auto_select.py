@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 from odoo.tests import tagged
+
 from odoo.addons.point_of_sale.tests.test_frontend import TestPointOfSaleHttpCommon
 
 
@@ -18,7 +18,7 @@ class TestPosScanAutoSelect(TestPointOfSaleHttpCommon):
         )
 
     def test_pos_scan_auto_select_from_search(self):
-        """Test that scanning a barcode in the POS search input triggers scan and clears input."""
+        """Test scanning a barcode in POS search triggers scan and clears input."""
         self.main_pos_config.with_user(self.pos_user).open_ui()
         self.start_tour(
             f"/pos/ui?config_id={self.main_pos_config.id}",

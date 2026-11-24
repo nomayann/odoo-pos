@@ -10,7 +10,7 @@ Dans le Point de Vente d'Odoo, un caissier peut parfois scanner un code-barres a
 
 La confusion avec le comportement de scan standard déclenche un comportement de recherche/sélection inadapté, exposant à des produits non facturés.
 
-Le lecteur de code part émet une chaine composée de 8 à 14 chiffres + `Entrée`.
+Le lecteur de code-barres émet une chaine composée de 8 à 14 chiffres + `Entrée`.
 
 Ce module ajoute le comportement suivant (écran `ProductScreen`):
 
