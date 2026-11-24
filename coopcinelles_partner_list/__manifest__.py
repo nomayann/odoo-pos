@@ -20,7 +20,7 @@
             "coopcinelles_partner_list/static/src/app/screens/partner_list_patch.esm.js",
         ],
         "web.assets_tests": [
-            "coopcinelles_partner_list/static/tests/tours/partner_list_rgpd_tour.js",
+            "coopcinelles_partner_list/static/tests/tours/partner_list_rgpd_tour.esm.js",
         ],
     },
     "installable": True,
