@@ -1,7 +1,7 @@
 /** @odoo-module */
 
-import { PartnerList } from "@point_of_sale/app/screens/partner_list/partner_list";
-import { patch } from "@web/core/utils/patch";
+import {PartnerList} from "@point_of_sale/app/screens/partner_list/partner_list";
+import {patch} from "@web/core/utils/patch";
 
 /**
  * This patch modifies the PartnerList component
@@ -19,7 +19,6 @@ patch(PartnerList.prototype, {
 
         return this.filterPartnersByName(partners);
     },
-    // filterPartnersByName filters the partners based on the search query, considering only the partner name.
     filterPartnersByName(partners) {
         const query = (this.state.query || "").trim().toLowerCase();
 
