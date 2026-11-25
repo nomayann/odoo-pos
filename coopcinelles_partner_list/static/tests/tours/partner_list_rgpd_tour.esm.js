@@ -1,6 +1,6 @@
 /** @odoo-module */
 
-import { registry } from "@web/core/registry";
+import {registry} from "@web/core/registry";
 
 const SEARCH_INPUT_SELECTOR =
     ".partner-list input, .o_partner_list input, .modal-header input[type='text']";
@@ -38,8 +38,8 @@ const setSearchValue = (value) => {
     } else {
         input.value = value;
     }
-    input.dispatchEvent(new Event("input", { bubbles: true }));
-    input.dispatchEvent(new Event("change", { bubbles: true }));
+    input.dispatchEvent(new Event("input", {bubbles: true}));
+    input.dispatchEvent(new Event("change", {bubbles: true}));
     input.dispatchEvent(
         new KeyboardEvent("keyup", {
             key: "Enter",
@@ -59,7 +59,8 @@ registry.category("web_tour.tours").add("CoopcinellesPartnerListRgpdTour", {
             run: "click",
         },
         {
-            content: "Verify GDPR address and email/phone elements are hidden with d-none",
+            content:
+                "Verify GDPR address and email/phone elements are hidden with d-none",
             trigger: ".partner-list, .o_partner_list",
             run: () => {
                 const hiddenNodes = [
@@ -68,7 +69,9 @@ registry.category("web_tour.tours").add("CoopcinellesPartnerListRgpdTour", {
                     ),
                 ];
                 if (hiddenNodes.length === 0) {
-                    throw new Error("Expected RGPD partner info elements to have d-none class");
+                    throw new Error(
+                        "Expected RGPD partner info elements to have d-none class"
+                    );
                 }
             },
         },
