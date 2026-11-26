@@ -5,7 +5,6 @@ import {patch} from "@web/core/utils/patch";
 import {useService} from "@web/core/utils/hooks";
 import {onMounted, onWillUnmount} from "@odoo/owl";
 
-
 patch(ProductScreen.prototype, {
     setup() {
         super.setup(...arguments);

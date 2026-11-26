@@ -11,7 +11,7 @@ const pressEnter = (input) => {
             which: 13,
             bubbles: true,
             cancelable: true,
-        }),
+        })
     );
 };
 
@@ -27,7 +27,7 @@ const assertOrderlineQty = (productName, expectedQty = 1) => {
     const qty = Number.parseFloat(qtyText.replace(/\s+/g, "").replace(",", "."));
     if (!Number.isFinite(qty) || qty !== expectedQty) {
         throw new Error(
-            `Expected quantity ${expectedQty} for "${productName}", got "${qtyText}"`,
+            `Expected quantity ${expectedQty} for "${productName}", got "${qtyText}"`
         );
     }
 };
@@ -39,7 +39,7 @@ registry.category("web_tour.tours").add("CoopcinellesPosScanAutoSelectTour", {
             trigger: ".pos-topheader input[type='text']",
             run: () => {
                 const input = document.querySelector(
-                    ".pos-topheader input[type='text']",
+                    ".pos-topheader input[type='text']"
                 );
                 if (input) {
                     input.value = "";
@@ -61,7 +61,7 @@ registry.category("web_tour.tours").add("CoopcinellesPosScanAutoSelectTour", {
             trigger: ".pos-topheader input[type='text']",
             run: () => {
                 const input = document.querySelector(
-                    ".pos-topheader input[type='text']",
+                    ".pos-topheader input[type='text']"
                 );
                 pressEnter(input);
             },
@@ -71,16 +71,16 @@ registry.category("web_tour.tours").add("CoopcinellesPosScanAutoSelectTour", {
             trigger: ".pos-topheader input[type='text']",
             run: () => {
                 const input = document.querySelector(
-                    ".pos-topheader input[type='text']",
+                    ".pos-topheader input[type='text']"
                 );
                 if (input.value !== "") {
                     throw new Error(
-                        `Expected search input to be empty, got "${input.value}"`,
+                        `Expected search input to be empty, got "${input.value}"`
                     );
                 }
                 if (document.activeElement === input) {
                     throw new Error(
-                        "Expected search input to lose focus (blur) after scan",
+                        "Expected search input to lose focus (blur) after scan"
                     );
                 }
             },
@@ -101,7 +101,7 @@ registry.category("web_tour.tours").add("CoopcinellesPosScanAutoSelectTour", {
             trigger: ".pos-topheader input[type='text']",
             run: () => {
                 const input = document.querySelector(
-                    ".pos-topheader input[type='text']",
+                    ".pos-topheader input[type='text']"
                 );
                 pressEnter(input);
             },
@@ -111,11 +111,11 @@ registry.category("web_tour.tours").add("CoopcinellesPosScanAutoSelectTour", {
             trigger: ".pos-topheader input[type='text']",
             run: () => {
                 const input = document.querySelector(
-                    ".pos-topheader input[type='text']",
+                    ".pos-topheader input[type='text']"
                 );
                 if (input.value !== "Produit Test") {
                     throw new Error(
-                        `Expected search input to keep "Produit Test", got "${input.value}"`,
+                        `Expected search input to keep "Produit Test", got "${input.value}"`
                     );
                 }
             },
