@@ -12,6 +12,15 @@
         <xpath expr="//div[hasclass('partner-line-email')]" position="attributes">
             <attribute name="class">partner-line-email p-1 d-none</attribute>
         </xpath>
+        <xpath expr="//div[hasclass('partner-line-email')]" position="after">
+            <t t-set="membershipBadge" t-value="getMembershipBadge(props.partner)" />
+            <div class="partner-line-membership p-1" t-if="membershipBadge">
+                <span
+                    t-attf-class="badge rounded-pill {{ membershipBadge.badgeClass }}"
+                    t-esc="membershipBadge.label"
+                />
+            </div>
+        </xpath>
 
         <!-- 2. DESKTOP MODE : Hide the address cell -->
         <xpath
@@ -24,6 +33,18 @@
         <!-- 3. DESKTOP MODE : Hide the contact cell (Phone / Email) -->
         <xpath expr="//td[hasclass('partner-line-email')]" position="attributes">
             <attribute name="class">partner-line-email d-none</attribute>
+        </xpath>
+
+        <!-- 4. DESKTOP MODE : Display membership badge aligned with header -->
+        <xpath expr="//td[hasclass('partner-line-email')]" position="after">
+            <td class="partner-line-membership py-2 align-middle">
+                <t t-set="membershipBadge" t-value="getMembershipBadge(props.partner)" />
+                <span
+                    t-if="membershipBadge"
+                    t-attf-class="badge rounded-pill {{ membershipBadge.badgeClass }}"
+                    t-esc="membershipBadge.label"
+                />
+            </td>
         </xpath>
     </t>
 </templates>

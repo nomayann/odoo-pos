@@ -17,5 +17,10 @@
         <xpath expr="//th[hasclass('partner-line-email')]" position="attributes">
             <attribute name="class">partner-line-email py-2 d-none</attribute>
         </xpath>
+
+        <!-- Add membership column header -->
+        <xpath expr="//th[hasclass('partner-line-email')]" position="after">
+            <th class="partner-line-membership py-2">Membership</th>
+        </xpath>
     </t>
 </templates>

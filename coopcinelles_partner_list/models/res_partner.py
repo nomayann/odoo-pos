@@ -1,4 +1,7 @@
+from datetime import date
+
 from odoo import api, models
+from odoo.osv import expression
 
 
 class ResPartner(models.Model):
@@ -9,14 +12,17 @@ class ResPartner(models.Model):
         domain = super()._load_pos_data_domain(data)
         if not isinstance(domain, list):
             domain = []
-        domain.extend(
+        min_membership_start = date(date.today().year - 1, 3, 1)
+        return expression.AND(
             [
-                ("customer_rank", ">", 0),
-                # complete with relevant conditions, if any, to filter out pure
-                # suppliers and Odoo users from the partner list
-                # ("is_company", "=", False),  # Exclude companies
-                # ("membership_state", "not_in", ["none", "cancelled", "old"]),
-                # ("active", "=", True),  # Exclude inactive partners
+                domain,
+                [("membership_start", ">=", min_membership_start)],
             ]
         )
-        return domain
+
+    @api.model
+    def _load_pos_data_fields(self, config_id):
+        fields = super()._load_pos_data_fields(config_id)
+        fields.extend(["membership_start", "membership_state"])
+        return fields
+
