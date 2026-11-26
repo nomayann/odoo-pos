@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t
+        t-name="coopcinelles_partner_list.PartnerListOverride"
+        t-inherit="point_of_sale.PartnerList"
+        t-inherit-mode="extension"
+    >
+        <!--
+        Original template path:
+            * addons/point_of_sale/static/src/app/screens/partner_list/partner_line/partner_line.xml
+        Override PartnerList template to hide address and contact
+        -->
+        <xpath expr="//th[normalize-space(text())='Address']" position="attributes">
+            <attribute name="class">py-2 d-none</attribute>
+        </xpath>
+
+        <xpath expr="//th[hasclass('partner-line-email')]" position="attributes">
+            <attribute name="class">partner-line-email py-2 d-none</attribute>
+        </xpath>
+
+        <!-- Add membership column header -->
+        <xpath expr="//th[hasclass('partner-line-email')]" position="after">
+            <th class="partner-line-membership py-2">Membership</th>
+        </xpath>
+    </t>
+</templates>

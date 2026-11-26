@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* coopcinelles_partner_list
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-26 21:00+0000\n"
+"PO-Revision-Date: 2026-11-26 21:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: coopcinelles_partner_list
+#: code:addons/coopcinelles_partner_list/static/src/xml/partner_list.xml:0
+msgid "Membership"
+msgstr "Adhésion"
+
+#. module: coopcinelles_partner_list
+#: code:addons/coopcinelles_partner_list/static/src/js/partner_line_patch.esm.js:0
+msgid "Free Member"
+msgstr "Membre gratuit"
+
+#. module: coopcinelles_partner_list
+#: code:addons/coopcinelles_partner_list/static/src/js/partner_line_patch.esm.js:0
+msgid "Paid Member"
+msgstr "Membre à jour"
+
+#. module: coopcinelles_partner_list
+#: code:addons/coopcinelles_partner_list/static/src/js/partner_line_patch.esm.js:0
+msgid "Invoiced Member"
+msgstr "Membre facturé"
+
+#. module: coopcinelles_partner_list
+#: code:addons/coopcinelles_partner_list/static/src/js/partner_line_patch.esm.js:0
+msgid "Waiting Member"
+msgstr "En attente"
+
+#. module: coopcinelles_partner_list
+#: code:addons/coopcinelles_partner_list/static/src/js/partner_line_patch.esm.js:0
+msgid "Expired Member"
+msgstr "Adhésion expirée"
+
+#. module: coopcinelles_partner_list
+#: code:addons/coopcinelles_partner_list/static/src/js/partner_line_patch.esm.js:0
+msgid "Cancelled Member"
+msgstr "Adhésion annulée"
+
+#. module: coopcinelles_partner_list
+#: code:addons/coopcinelles_partner_list/static/src/js/partner_line_patch.esm.js:0
+msgid "Non Member"
+msgstr "Non adhérent"
