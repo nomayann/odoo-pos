@@ -2,7 +2,7 @@
     "name": "POS Scan Auto Select",
     "author": "Elabore, Coop'Cinelles",
     "website": "https://git.elabore.coop/elabore/coopcinelles-addons",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Point of Sale",
     "summary": "Auto-select scanned product from POS search bar",
     "depends": ["point_of_sale"],
