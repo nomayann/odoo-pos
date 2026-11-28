@@ -221,3 +221,6 @@ __marimo__/
 
 # Root zip file for Odoo module packaging
 *.zip
+
+# odoo outputs
+odoo_tests_output/
