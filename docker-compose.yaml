@@ -1,6 +1,7 @@
 services:
   web:
-    image: odoo:18.0
+    build: .
+    shm_size: "1g"
     depends_on:
       - db
     ports:
@@ -8,8 +9,8 @@ services:
     command: ["odoo", "--dev=all"]
     volumes:
       - odoo-web-data:/var/lib/odoo
-      # Mount the current directory to /mnt/extra-addons in the container
       - .:/mnt/extra-addons
+      - ./odoo_tests_output:/tmp/odoo_tests/test
     environment:
       - HOST=db
       - USER=odoo
